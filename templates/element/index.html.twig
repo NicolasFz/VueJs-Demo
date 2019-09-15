@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ElementController!{% endblock %}
+
+{% block body %}
+    <br>
+    Saved Elements : 
+    <ul>
+        {% for element in saved_elements %}
+            <li> 
+                <span> Element {{ element.name }} ({{element.id}}) (Value : {{element.value}})</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <div ref="words" data-words="
+        {% for element in saved_elements %}
+            {{ element.name }},
+         {% endfor %}
+    ">
+    </div>
+
+        {{ form_start(search_form, 
+        { 'attr': {'v-on:submit.prevent' : 'performSearch' }}
+    ) }}
+        {{ form_widget(search_form.name, { 'attr': { 'v-model': 'search', 'class' : 'toto' } }) }}
+    {{ form_end(search_form) }}
+
+    <example></example>
+    <widget ref="widget"></widget>
+{% endblock %}
